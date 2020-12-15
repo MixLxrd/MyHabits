@@ -23,7 +23,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let slider = UISlider()
         slider.toAutoLayout()
         slider.isEnabled = false
-        slider.setThumbImage(nil, for: .normal)
+        slider.setThumbImage(UIImage(), for: .normal)
         
         slider.setValue(HabitsStore.shared.todayProgress, animated: true)
         slider.tintColor = .CustomPurple
@@ -75,5 +75,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
             statusLabel.trailingAnchor.constraint(equalTo: habitSlider.trailingAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+        
+        
     }
 }

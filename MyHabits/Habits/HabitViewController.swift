@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HabitViewControllerDelegate {
+    func refreshSmth()
+}
+
 class HabitViewController: UIViewController {
     
     @IBOutlet var cancelButton: UIBarButtonItem!
@@ -22,11 +26,14 @@ class HabitViewController: UIViewController {
     }
     
     @IBAction func actionSaveButton(_ sender: Any) {
+        
         newHabit.name = nameTextField.text ?? ""
         let store = HabitsStore.shared
         store.habits.append(newHabit)
         dismiss(animated: true, completion: nil)
-        habitsVC.habitsCollecionView.reloadData()
+        
+        habitsVC.delegate?.refreshSmth()
+        
     }
     
     private lazy var datepicker: UIDatePicker = {
@@ -98,6 +105,14 @@ class HabitViewController: UIViewController {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "\(newHabit.dateString)"
+        
+        /*
+        //let myString = "\(newHabit.dateString)"
+        let myString = "Каждый день в \(datepicker.date)"
+        let myAttribute = [ NSAttributedString.Key.foregroundColor: UIColor.CustomPurple]
+        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
+        label.attributedText = myAttrString
+         */
         label.font = .FootNoteBold
         return label
     }()
@@ -151,6 +166,7 @@ class HabitViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraints)
         
+        
     }
 }
 
@@ -163,3 +179,10 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
 }
 
 
+extension HabitViewController: HabitViewControllerDelegate {
+    func refreshSmth() {
+        habitsVC.habitsCollecionView.reloadData()
+    }
+    
+    
+}

@@ -11,6 +11,7 @@ class HabitsViewController: UIViewController {
     
     private lazy var store = HabitsStore.shared
     
+    var delegate: HabitViewControllerDelegate?
     
     lazy var habitsCollecionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +38,9 @@ class HabitsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        delegate = self
+        
         habitsCollecionView.reloadData()
         
         setupLayout()
@@ -101,7 +105,7 @@ extension HabitsViewController: UICollectionViewDataSource {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as! HabitCollectionViewCell
             
-            cell.delegate = self
+            // cell.delegate = self
             
             let habit = store.habits[indexPath.item]
             cell.configure(habit: habit)
@@ -139,7 +143,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension HabitsViewController: MyCollectionViewCellDelegate {
+extension HabitsViewController: HabitViewControllerDelegate {
     func refreshSmth() {
         
         habitsCollecionView.reloadData()
