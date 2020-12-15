@@ -14,7 +14,6 @@
 		2C9E330C256EC51E00D122F1 /* UIView + AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E330B256EC51E00D122F1 /* UIView + AutoLayout.swift */; };
 		2C9E3310256EC61900D122F1 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E330F256EC61900D122F1 /* CustomUI.swift */; };
 		2C9E3315256ED0E100D122F1 /* Information about Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3314256ED0E100D122F1 /* Information about Habits.swift */; };
-		2C9E3318256EDEE100D122F1 /* HabitHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3317256EDEE100D122F1 /* HabitHeaderView.swift */; };
 		2C9E332325723E0700D122F1 /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E332225723E0700D122F1 /* HabitCollectionViewCell.swift */; };
 		2CCF3C022551B55800F36903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF3C012551B55800F36903 /* AppDelegate.swift */; };
 		2CCF3C042551B55800F36903 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF3C032551B55800F36903 /* SceneDelegate.swift */; };
@@ -35,7 +34,6 @@
 		2C9E330B256EC51E00D122F1 /* UIView + AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + AutoLayout.swift"; sourceTree = "<group>"; };
 		2C9E330F256EC61900D122F1 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		2C9E3314256ED0E100D122F1 /* Information about Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information about Habits.swift"; sourceTree = "<group>"; };
-		2C9E3317256EDEE100D122F1 /* HabitHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHeaderView.swift; sourceTree = "<group>"; };
 		2C9E332225723E0700D122F1 /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CCF3BFE2551B55800F36903 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCF3C012551B55800F36903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				2CCF3C212551B92E00F36903 /* HabitsStore.swift */,
 				2C9E332225723E0700D122F1 /* HabitCollectionViewCell.swift */,
 				2CCF3C252551BA5200F36903 /* HabitsViewController.swift */,
-				2C9E3317256EDEE100D122F1 /* HabitHeaderView.swift */,
 				2C9E33012564555200D122F1 /* HabitViewController.swift */,
 				2C17288C258546C40084534B /* ProgressCollectionViewCell.swift */,
 			);
@@ -206,7 +203,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9E3318256EDEE100D122F1 /* HabitHeaderView.swift in Sources */,
 				2C9E330C256EC51E00D122F1 /* UIView + AutoLayout.swift in Sources */,
 				2CCF3C222551B92E00F36903 /* HabitsStore.swift in Sources */,
 				2C9E3310256EC61900D122F1 /* CustomUI.swift in Sources */,

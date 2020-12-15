@@ -12,17 +12,22 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     private lazy var nameHabit: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
+        
         label.text = "Все получится!"
-        label.font = .FootNoteBold
+        label.font = .FootNoteStatus
+        label.textColor = .systemGray
         return label
     }()
     
     private lazy var habitSlider: UISlider = {
         let slider = UISlider()
         slider.toAutoLayout()
+        slider.isEnabled = false
+        slider.setThumbImage(nil, for: .normal)
+        
         slider.setValue(HabitsStore.shared.todayProgress, animated: true)
         slider.tintColor = .CustomPurple
-        slider.isEnabled = false
+        
         
         return slider
     }()
@@ -31,16 +36,19 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = .FootNote
+        label.textColor = .systemGray
         label.text = String(Int(HabitsStore.shared.todayProgress * 100)) + "%"
         return label
     }()
     
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.roundCornerWithRadius(4, top: true, bottom: true, shadowEnabled: true)
+        
         setupLayout()
+        
     }
     
     required init?(coder: NSCoder) {

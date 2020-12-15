@@ -24,7 +24,7 @@ class HabitsViewController: UIViewController {
         return collectionView
     }()
     @IBOutlet var testButton: UIButton!
-
+    
     
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
@@ -40,7 +40,7 @@ class HabitsViewController: UIViewController {
         habitsCollecionView.reloadData()
         
         setupLayout()
-        //HabitsStore.shared.habits.removeAll()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,10 +57,7 @@ class HabitsViewController: UIViewController {
         testButton.toAutoLayout()
         habitsCollecionView.backgroundColor = .lightGray
         let constraints = [
-            /*
-             createHabitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-             createHabitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16),
-             */
+
             testButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16),
             
@@ -113,17 +110,11 @@ extension HabitsViewController: UICollectionViewDataSource {
         }
         
     }
-    /*
-     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-     let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: String(describing: MainHabitsHeaderView.self), withReuseIdentifier: String(describing: MainHabitsHeaderView.self), for: indexPath)
-     return headerView
-     }
-     */
     
 }
 
 extension HabitsViewController: UICollectionViewDelegateFlowLayout {
-
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
@@ -150,7 +141,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
 
 extension HabitsViewController: MyCollectionViewCellDelegate {
     func refreshSmth() {
-    
+        
         habitsCollecionView.reloadData()
         
     }

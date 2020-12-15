@@ -11,33 +11,23 @@ class HabitViewController: UIViewController {
     
     @IBOutlet var cancelButton: UIBarButtonItem!
     @IBOutlet var saveButton: UIBarButtonItem!
-    let habitsVC = HabitsViewController()
+    var habitsVC = HabitsViewController()
     
     private let newHabit = Habit(name: "Выпить стакан воды перед завтраком",
-                         date: Date(),
-                         color: .systemRed)
-    
-    
-    
+                                 date: Date(),
+                                 color: .systemRed)
     
     @IBAction func actionCancelButton(_ sender: Any) {
-        
-        
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func actionSaveButton(_ sender: Any) {
         newHabit.name = nameTextField.text ?? ""
-        
         let store = HabitsStore.shared
         store.habits.append(newHabit)
         dismiss(animated: true, completion: nil)
         habitsVC.habitsCollecionView.reloadData()
     }
-    
-    let habitHeaderView = HabitHeaderView()
-    
-    
     
     private lazy var datepicker: UIDatePicker = {
         let dp = UIDatePicker()
@@ -50,9 +40,7 @@ class HabitViewController: UIViewController {
     @objc func datePickerChanged(picker: UIDatePicker) {
         newHabit.date = datepicker.date
         habitTimeLabel.text = "\(newHabit.dateString)"
-        
     }
-    
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -78,7 +66,6 @@ class HabitViewController: UIViewController {
         label.font = .FootNoteBold
         return label
     }()
-    
     
     private lazy var colorPickerView: UIView = {
         let view = UIView()
@@ -117,13 +104,7 @@ class HabitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         setupLayout()
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
         
     }
     
@@ -132,7 +113,6 @@ class HabitViewController: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)
         view.addSubview(colorLabel)
-        //view.addSubview(colorWell)
         view.addSubview(colorPickerView)
         view.addSubview(timeLabel)
         view.addSubview(habitTimeLabel)
@@ -156,13 +136,6 @@ class HabitViewController: UIViewController {
             colorPickerView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             colorPickerView.heightAnchor.constraint(equalToConstant: 30),
             colorPickerView.widthAnchor.constraint(equalToConstant: 30),
-            /*
-             
-             colorWell.topAnchor.constraint(equalTo: colorLabel.bottomAnchor, constant: 7),
-             colorWell.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-             colorWell.heightAnchor.constraint(equalToConstant: 30),
-             colorWell.widthAnchor.constraint(equalToConstant: 30),
-             */
             
             timeLabel.topAnchor.constraint(equalTo: colorPickerView.bottomAnchor, constant: 15),
             timeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
@@ -179,21 +152,6 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
         
     }
-    
-    
-    /*
-     private lazy var colorWell: UIColorWell = {
-     let color = UIColorWell(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-     color.toAutoLayout()
-     color.addTarget(self, action: #selector(colorWellValueChanged(_:)), for: .valueChanged)
-     return color
-     }()
-     
-     
-     @objc func colorWellValueChanged(_ sender: Any) {
-     colorWell.backgroundColor = colorWell.selectedColor
-     }
-     */
 }
 
 extension HabitViewController: UIColorPickerViewControllerDelegate {

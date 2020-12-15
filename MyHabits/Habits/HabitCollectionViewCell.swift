@@ -16,8 +16,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     var delegate: MyCollectionViewCellDelegate?
     
     var habit = Habit(name: "Выпить стакан воды перед завтраком",
-                         date: Date(),
-                         color: .systemRed)
+                      date: Date(),
+                      color: .systemRed)
     
     private lazy var nameHabitLabel: UILabel = {
         let label = UILabel()
@@ -31,7 +31,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .FootNote
         label.toAutoLayout()
-        
+        label.textColor = .systemGray
         return label
     }()
     
@@ -39,11 +39,12 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = .Caption
+        label.textColor = .systemGray
         return label
     }()
     
     private lazy var checkBoxButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.roundCornerWithRadius(18, top: true, bottom: true, shadowEnabled: false)
         button.toAutoLayout()
         button.backgroundColor = .white
