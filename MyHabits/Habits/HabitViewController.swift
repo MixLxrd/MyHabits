@@ -13,7 +13,7 @@ class HabitViewController: UIViewController {
                                  date: Date(),
                                  color: .systemRed)
     
-
+    
     
     private lazy var datepicker: UIDatePicker = {
         let dp = UIDatePicker()
@@ -89,7 +89,7 @@ class HabitViewController: UIViewController {
     }()
     
     private lazy var customNavigationBar: UINavigationBar = {
-       let bar = UINavigationBar()
+        let bar = UINavigationBar()
         
         return bar
     }()
@@ -105,8 +105,11 @@ class HabitViewController: UIViewController {
         store.habits.append(newHabit)
         //self.navigationController?.pushViewController(HabitsViewController(), animated: true)
         //present(HabitsViewController(), animated: true, completion: nil)
-        self.navigationController?.popToViewController(HabitsViewController(), animated: true)
-        
+        //self.navigationController?.popToViewController(HabitsViewController(), animated: true)
+        //let vc = HabitsViewController()
+        //vc.modalPresentationStyle = .fullScreen
+        //self.navigationController?.present(vc, animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -117,10 +120,12 @@ class HabitViewController: UIViewController {
     
     private func setupLayout() {
         
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        let navBar = UINavigationBar()
+        navBar.toAutoLayout()
         view.addSubview(navBar)
         let const = [ navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                      navBar.heightAnchor.constraint(equalToConstant: 50)
+                      navBar.heightAnchor.constraint(equalToConstant: 44),
+                      navBar.widthAnchor.constraint(equalTo: view.widthAnchor)
         ]
         
         NSLayoutConstraint.activate(const)
@@ -134,6 +139,7 @@ class HabitViewController: UIViewController {
         navItem.title = "Create"
         navBar.setItems([navItem], animated: true)
         navBar.backgroundColor = .systemGray
+        
         view.backgroundColor = .white
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)

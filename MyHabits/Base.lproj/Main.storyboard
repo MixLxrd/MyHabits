@@ -37,9 +37,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Привычки" image="rectangle.grid.1x2.fill" catalog="system" id="BIZ-9p-Bz6"/>
                     <navigationItem key="navigationItem" id="WuN-lx-CVE"/>
-                    <connections>
-                        <segue destination="hgu-79-Vv0" kind="presentation" id="kT4-Ir-60t"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDz-0w-XtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -50,7 +47,7 @@
             <objects>
                 <viewController id="hgu-79-Vv0" customClass="HabitViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rwx-kH-gzh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="qE1-8a-9sP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

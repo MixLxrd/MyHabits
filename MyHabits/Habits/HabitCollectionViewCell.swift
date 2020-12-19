@@ -55,7 +55,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
         } else {
             HabitsStore.shared.track(habit)
             checkBoxButton.backgroundColor = habit.color
-            
         }
     }
     

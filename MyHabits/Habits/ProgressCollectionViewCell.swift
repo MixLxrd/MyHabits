@@ -24,11 +24,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         slider.toAutoLayout()
         slider.isEnabled = false
         slider.setThumbImage(UIImage(), for: .normal)
-        
         slider.setValue(HabitsStore.shared.todayProgress, animated: true)
         slider.tintColor = .CustomPurple
-        
-        
         return slider
     }()
     

@@ -33,7 +33,9 @@ class HabitsViewController: UIViewController {
     } ()
     
     @objc func tapAddButton() {
-        self.navigationController?.present(HabitViewController(), animated: true, completion: nil)
+        let vc = HabitViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(vc, animated: true, completion: nil)
         //present(HabitViewController(), animated: true, completion: nil)
         
     }
