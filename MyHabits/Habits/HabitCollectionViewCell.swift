@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol MyCollectionViewCellDelegate {
-    func refreshSmth()
-}
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
-    var delegate: MyCollectionViewCellDelegate?
     
     var habit = Habit(name: "Выпить стакан воды перед завтраком",
                       date: Date(),
@@ -59,7 +55,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         } else {
             HabitsStore.shared.track(habit)
             checkBoxButton.backgroundColor = habit.color
-            self.delegate?.refreshSmth()
+            
         }
     }
     
@@ -72,6 +68,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupLayout()
     }
     
     func configure(habit: Habit) {
@@ -82,9 +79,13 @@ class HabitCollectionViewCell: UICollectionViewCell {
         trackerLabel.text = "Подряд: \(Int.random(in: 0...10))"
         checkBoxButton.layer.borderColor = habit.color.cgColor
         
+        
         if habit.isAlreadyTakenToday {
             checkBoxButton.backgroundColor = habit.color
+        } else {
+            checkBoxButton.backgroundColor = .white
         }
+         
     }
     
     private func setupLayout() {

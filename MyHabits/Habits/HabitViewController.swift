@@ -7,34 +7,13 @@
 
 import UIKit
 
-protocol HabitViewControllerDelegate {
-    func refreshSmth()
-}
-
 class HabitViewController: UIViewController {
-    
-    @IBOutlet var cancelButton: UIBarButtonItem!
-    @IBOutlet var saveButton: UIBarButtonItem!
-    var habitsVC = HabitsViewController()
     
     private let newHabit = Habit(name: "Выпить стакан воды перед завтраком",
                                  date: Date(),
                                  color: .systemRed)
     
-    @IBAction func actionCancelButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func actionSaveButton(_ sender: Any) {
-        
-        newHabit.name = nameTextField.text ?? ""
-        let store = HabitsStore.shared
-        store.habits.append(newHabit)
-        dismiss(animated: true, completion: nil)
-        
-        habitsVC.delegate?.refreshSmth()
-        
-    }
+
     
     private lazy var datepicker: UIDatePicker = {
         let dp = UIDatePicker()
@@ -105,17 +84,30 @@ class HabitViewController: UIViewController {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "\(newHabit.dateString)"
-        
-        /*
-        //let myString = "\(newHabit.dateString)"
-        let myString = "Каждый день в \(datepicker.date)"
-        let myAttribute = [ NSAttributedString.Key.foregroundColor: UIColor.CustomPurple]
-        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
-        label.attributedText = myAttrString
-         */
         label.font = .FootNoteBold
         return label
     }()
+    
+    private lazy var customNavigationBar: UINavigationBar = {
+       let bar = UINavigationBar()
+        
+        return bar
+    }()
+    
+    @objc func actionCancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func actionSaveButton(_ sender: Any) {
+        
+        newHabit.name = nameTextField.text ?? ""
+        let store = HabitsStore.shared
+        store.habits.append(newHabit)
+        //self.navigationController?.pushViewController(HabitsViewController(), animated: true)
+        //present(HabitsViewController(), animated: true, completion: nil)
+        self.navigationController?.popToViewController(HabitsViewController(), animated: true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +117,24 @@ class HabitViewController: UIViewController {
     
     private func setupLayout() {
         
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        view.addSubview(navBar)
+        let const = [ navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                      navBar.heightAnchor.constraint(equalToConstant: 50)
+        ]
+        
+        NSLayoutConstraint.activate(const)
+        let navItem = UINavigationItem()
+        
+        let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(actionCancelButton))
+        let rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(actionSaveButton))
+        
+        navItem.rightBarButtonItem = rightBarButtonItem
+        navItem.leftBarButtonItem = leftBarButtonItem
+        navItem.title = "Create"
+        navBar.setItems([navItem], animated: true)
+        navBar.backgroundColor = .systemGray
+        view.backgroundColor = .white
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)
         view.addSubview(colorLabel)
@@ -135,7 +145,7 @@ class HabitViewController: UIViewController {
         datepicker.toAutoLayout()
         
         let constraints = [
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 22),
+            nameLabel.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 22),
             nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
             nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 7),
@@ -178,11 +188,3 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     }
 }
 
-
-extension HabitViewController: HabitViewControllerDelegate {
-    func refreshSmth() {
-        habitsVC.habitsCollecionView.reloadData()
-    }
-    
-    
-}

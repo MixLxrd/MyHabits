@@ -11,8 +11,6 @@ class HabitsViewController: UIViewController {
     
     private lazy var store = HabitsStore.shared
     
-    var delegate: HabitViewControllerDelegate?
-    
     lazy var habitsCollecionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -24,8 +22,21 @@ class HabitsViewController: UIViewController {
         collectionView.dataSource = self
         return collectionView
     }()
-    @IBOutlet var testButton: UIButton!
     
+    
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        button.toAutoLayout()
+        button.backgroundColor = .red
+        button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        return button
+    } ()
+    
+    @objc func tapAddButton() {
+        self.navigationController?.present(HabitViewController(), animated: true, completion: nil)
+        //present(HabitViewController(), animated: true, completion: nil)
+        
+    }
     
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
@@ -38,32 +49,29 @@ class HabitsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        delegate = self
-        
+        //HabitsStore.shared.habits.removeAll()
         habitsCollecionView.reloadData()
-        
         setupLayout()
-        
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         habitsCollecionView.reloadData()
-        
+        setupLayout()
+        navigationController?.navigationBar.isHidden = true
     }
-    
-    
     private func setupLayout() {
         view.addSubview(habitsCollecionView)
-        //view.addSubview(createHabitButton)
         view.addSubview(todayLabel)
-        testButton.toAutoLayout()
-        habitsCollecionView.backgroundColor = .lightGray
+        view.addSubview(addButton)
+        habitsCollecionView.backgroundColor = .AlmostWhite
         let constraints = [
 
-            testButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16),
+            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16),
+            addButton.heightAnchor.constraint(equalToConstant: 30),
+            addButton.widthAnchor.constraint(equalToConstant: 30),
             
             habitsCollecionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             habitsCollecionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -74,10 +82,6 @@ class HabitsViewController: UIViewController {
             todayLabel.bottomAnchor.constraint(equalTo: habitsCollecionView.topAnchor, constant: -8)
         ]
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    @IBAction func actionTestButton(_ sender: Any) {
-        
     }
 }
 
@@ -104,16 +108,14 @@ extension HabitsViewController: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as! HabitCollectionViewCell
-            
-            // cell.delegate = self
-            
             let habit = store.habits[indexPath.item]
             cell.configure(habit: habit)
-            
             return cell
         }
         
     }
+    
+    
     
 }
 
@@ -143,11 +145,3 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension HabitsViewController: HabitViewControllerDelegate {
-    func refreshSmth() {
-        
-        habitsCollecionView.reloadData()
-        
-    }
-    
-}
