@@ -5,27 +5,28 @@
 //  Created by Михаил Ильченко on 28.11.2020.
 //
 
+
 import UIKit
 
 class ProgressCollectionViewCell: UICollectionViewCell {
     
+    
     private lazy var nameHabit: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        
         label.text = "Все получится!"
         label.font = .FootNoteStatus
         label.textColor = .systemGray
         return label
     }()
     
-    private lazy var habitSlider: UISlider = {
+    private var habitSlider: UISlider = {
         let slider = UISlider()
         slider.toAutoLayout()
-        slider.isEnabled = false
         slider.setThumbImage(UIImage(), for: .normal)
         slider.setValue(HabitsStore.shared.todayProgress, animated: true)
         slider.tintColor = .CustomPurple
+        
         return slider
     }()
     
@@ -38,14 +39,17 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
+    func setupUI() {
+        habitSlider.setValue(HabitsStore.shared.todayProgress, animated: true)
+        statusLabel.text = String(Int(HabitsStore.shared.todayProgress * 100)) + "%"
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.roundCornerWithRadius(4, top: true, bottom: true, shadowEnabled: true)
+        
+        contentView.roundCornerWithRadius(4, top: true, bottom: true, shadowEnabled: false)
         
         setupLayout()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -76,3 +80,4 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         
     }
 }
+

@@ -9,6 +9,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Information-->
+        <scene sceneID="DCD-HK-MP9">
+            <objects>
+                <navigationController id="PUo-1k-l5r" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Information" id="jRp-sV-OeP"/>
+                    <navigationItem key="navigationItem" id="5fz-gs-yp9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EGd-8j-8HB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bh3-pj-nsz" kind="relationship" relationship="rootViewController" id="50M-sE-JhP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m6n-Xd-GuH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1694" y="459"/>
+        </scene>
         <!--Информация-->
         <scene sceneID="0qz-SM-Dpt">
             <objects>
@@ -20,10 +38,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Информация" image="info.circle.fill" catalog="system" id="ic8-Er-9FL"/>
+                    <navigationItem key="navigationItem" id="bnR-ya-gOX"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNA-SY-H1o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715.9420289855075" y="460.71428571428567"/>
+            <point key="canvasLocation" x="2686" y="460"/>
         </scene>
         <!--Привычки-->
         <scene sceneID="Xuo-qi-o6O">
@@ -37,10 +56,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Привычки" image="rectangle.grid.1x2.fill" catalog="system" id="BIZ-9p-Bz6"/>
                     <navigationItem key="navigationItem" id="WuN-lx-CVE"/>
+                    <connections>
+                        <segue destination="hgu-79-Vv0" kind="presentation" identifier="createHabit" id="eLH-60-9q6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDz-0w-XtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2686" y="-242"/>
+            <point key="canvasLocation" x="2685.5999999999999" y="-242.42878560719643"/>
         </scene>
         <!--Создать-->
         <scene sceneID="4rd-nv-Dp4">
@@ -75,11 +97,11 @@
             </objects>
             <point key="canvasLocation" x="3612" y="-242"/>
         </scene>
-        <!--Item-->
+        <!--Habits-->
         <scene sceneID="zJj-lY-jrA">
             <objects>
                 <navigationController id="d8H-eQ-TQy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="baa-di-hg0"/>
+                    <tabBarItem key="tabBarItem" title="Habits" id="baa-di-hg0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5p-52-VZh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -105,7 +127,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="d8H-eQ-TQy" kind="relationship" relationship="viewControllers" id="sG9-x0-rna"/>
-                        <segue destination="bh3-pj-nsz" kind="relationship" relationship="viewControllers" id="dSM-Zm-lhe"/>
+                        <segue destination="PUo-1k-l5r" kind="relationship" relationship="viewControllers" id="fP2-EQ-nB5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUS-DO-ZUm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

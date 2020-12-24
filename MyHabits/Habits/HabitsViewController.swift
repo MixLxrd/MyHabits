@@ -5,13 +5,17 @@
 //  Created by Михаил Ильченко on 03.11.2020.
 //
 
+protocol UpdateCollectionViewProtocol {
+    func reloadSlider()
+}
+
 import UIKit
 
-class HabitsViewController: UIViewController {
+class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
     
     private lazy var store = HabitsStore.shared
     
-    lazy var habitsCollecionView: UICollectionView = {
+    lazy var habitsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.toAutoLayout()
@@ -27,17 +31,19 @@ class HabitsViewController: UIViewController {
     private lazy var addButton: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
-        button.backgroundColor = .red
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.imageView?.sizeToFit()
+        button.imageView?.tintColor = .CustomPurple
         button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         return button
     } ()
     
     @objc func tapAddButton() {
         let vc = HabitViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.navigationController?.present(vc, animated: true, completion: nil)
-        //present(HabitViewController(), animated: true, completion: nil)
+        vc.delegate = self
+        //vc.modalPresentationStyle = .currentContext
         
+        self.navigationController?.present(vc, animated: true, completion: nil)
     }
     
     private lazy var todayLabel: UILabel = {
@@ -52,42 +58,48 @@ class HabitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //HabitsStore.shared.habits.removeAll()
-        habitsCollecionView.reloadData()
+        habitsCollectionView.reloadData()
         setupLayout()
         navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        habitsCollecionView.reloadData()
+        habitsCollectionView.reloadData()
         setupLayout()
         navigationController?.navigationBar.isHidden = true
     }
     private func setupLayout() {
-        view.addSubview(habitsCollecionView)
+        view.addSubview(habitsCollectionView)
         view.addSubview(todayLabel)
         view.addSubview(addButton)
-        habitsCollecionView.backgroundColor = .AlmostWhite
+        habitsCollectionView.backgroundColor = .AlmostWhite
         let constraints = [
-
-            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16),
+            
+            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -8),
             addButton.heightAnchor.constraint(equalToConstant: 30),
             addButton.widthAnchor.constraint(equalToConstant: 30),
             
-            habitsCollecionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            habitsCollecionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            habitsCollecionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            habitsCollecionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            habitsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            habitsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            habitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            habitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             todayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            todayLabel.bottomAnchor.constraint(equalTo: habitsCollecionView.topAnchor, constant: -8)
+            todayLabel.bottomAnchor.constraint(equalTo: habitsCollectionView.topAnchor, constant: -8)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func reloadSlider() {
+        habitsCollectionView.reloadData()
     }
 }
 
 extension HabitsViewController: UICollectionViewDataSource {
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
@@ -103,16 +115,18 @@ extension HabitsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProgressCollectionViewCell.self), for: indexPath) as! ProgressCollectionViewCell
-            
-            return cell
+            let cellProgress = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProgressCollectionViewCell.self), for: indexPath) as! ProgressCollectionViewCell
+            cellProgress.setupUI()
+            return cellProgress
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as! HabitCollectionViewCell
+            let cellHabit = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as! HabitCollectionViewCell
             let habit = store.habits[indexPath.item]
-            cell.configure(habit: habit)
-            return cell
+            cellHabit.configure(habit: habit)
+            cellHabit.didTapOnCell = { [weak self] in
+                self?.habitsCollectionView.reloadData()
+            }
+            return cellHabit
         }
         
     }

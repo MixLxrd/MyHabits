@@ -9,6 +9,8 @@ import UIKit
 
 class HabitViewController: UIViewController {
     
+    var delegate: UpdateCollectionViewProtocol?
+    
     private let newHabit = Habit(name: "Выпить стакан воды перед завтраком",
                                  date: Date(),
                                  color: .systemRed)
@@ -25,7 +27,7 @@ class HabitViewController: UIViewController {
     
     @objc func datePickerChanged(picker: UIDatePicker) {
         newHabit.date = datepicker.date
-        habitTimeLabel.text = "\(newHabit.dateString)"
+        habitTimeLabelTime.text = " \(dateFormatter.string(from: datepicker.date))"
     }
     
     private lazy var nameLabel: UILabel = {
@@ -42,6 +44,7 @@ class HabitViewController: UIViewController {
         textField.toAutoLayout()
         textField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
         textField.font = .FootNote
+        
         return textField
     }()
     
@@ -80,18 +83,31 @@ class HabitViewController: UIViewController {
         return label
     }()
     
-    private lazy var habitTimeLabel: UILabel = {
+    private lazy var habitTimeLabelText: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = "\(newHabit.dateString)"
-        label.font = .FootNoteBold
+        /*
+         let templateAttributedText: NSMutableAttributedString = .init(string: "")
+         templateAttributedText.append(.init(string: "Каждый день в", attributes: [.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.black]))
+         templateAttributedText.append(.init(string: " \(newHabit.date)", attributes: [.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.CustomPurple]))
+         label.attributedText = templateAttributedText
+         */
+        label.text = "Каждый день в"
+        return label
+    }()
+    private lazy var habitTimeLabelTime: UILabel = {
+        let label = UILabel()
+        label.toAutoLayout()
+        label.text = " \(dateFormatter.string(from: datepicker.date))"
+        label.tintColor = .CustomPurple
+        label.textColor = .CustomPurple
         return label
     }()
     
-    private lazy var customNavigationBar: UINavigationBar = {
-        let bar = UINavigationBar()
-        
-        return bar
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter
     }()
     
     @objc func actionCancelButton(_ sender: Any) {
@@ -103,12 +119,7 @@ class HabitViewController: UIViewController {
         newHabit.name = nameTextField.text ?? ""
         let store = HabitsStore.shared
         store.habits.append(newHabit)
-        //self.navigationController?.pushViewController(HabitsViewController(), animated: true)
-        //present(HabitsViewController(), animated: true, completion: nil)
-        //self.navigationController?.popToViewController(HabitsViewController(), animated: true)
-        //let vc = HabitsViewController()
-        //vc.modalPresentationStyle = .fullScreen
-        //self.navigationController?.present(vc, animated: true, completion: nil)
+        delegate?.reloadSlider()
         dismiss(animated: true, completion: nil)
     }
     
@@ -131,12 +142,13 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate(const)
         let navItem = UINavigationItem()
         
-        let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(actionCancelButton))
-        let rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(actionSaveButton))
-        
+        let leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(actionCancelButton))
+        let rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.done, target: self, action: #selector(actionSaveButton))
+        leftBarButtonItem.tintColor = .CustomPurple
+        rightBarButtonItem.tintColor = .CustomPurple
         navItem.rightBarButtonItem = rightBarButtonItem
         navItem.leftBarButtonItem = leftBarButtonItem
-        navItem.title = "Create"
+        navItem.title = "Создать"
         navBar.setItems([navItem], animated: true)
         navBar.backgroundColor = .systemGray
         
@@ -146,7 +158,8 @@ class HabitViewController: UIViewController {
         view.addSubview(colorLabel)
         view.addSubview(colorPickerView)
         view.addSubview(timeLabel)
-        view.addSubview(habitTimeLabel)
+        view.addSubview(habitTimeLabelText)
+        view.addSubview(habitTimeLabelTime)
         view.addSubview(datepicker)
         datepicker.toAutoLayout()
         
@@ -171,10 +184,12 @@ class HabitViewController: UIViewController {
             timeLabel.topAnchor.constraint(equalTo: colorPickerView.bottomAnchor, constant: 15),
             timeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
-            habitTimeLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 7),
-            habitTimeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            habitTimeLabelText.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 7),
+            habitTimeLabelText.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            habitTimeLabelTime.topAnchor.constraint(equalTo: habitTimeLabelText.topAnchor),
+            habitTimeLabelTime.leadingAnchor.constraint(equalTo: habitTimeLabelText.trailingAnchor),
             
-            datepicker.topAnchor.constraint(equalTo: habitTimeLabel.bottomAnchor, constant: 15),
+            datepicker.topAnchor.constraint(equalTo: habitTimeLabelText.bottomAnchor, constant: 15),
             datepicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             datepicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             

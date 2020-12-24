@@ -10,6 +10,7 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    var didTapOnCell: (() -> Void)?
     
     var habit = Habit(name: "Выпить стакан воды перед завтраком",
                       date: Date(),
@@ -35,6 +36,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = .Caption
+        label.text = "Подряд: \(habit.trackDates.count)"
         label.textColor = .systemGray
         return label
     }()
@@ -46,6 +48,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         button.backgroundColor = .white
         button.layer.borderWidth = 2
         button.addTarget(self, action: #selector(checkBoxButtonPressed), for: .touchUpInside)
+        
         return button
     }()
     
@@ -56,13 +59,16 @@ class HabitCollectionViewCell: UICollectionViewCell {
             HabitsStore.shared.track(habit)
             checkBoxButton.backgroundColor = habit.color
         }
+        didTapOnCell?()
     }
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.roundCornerWithRadius(6, top: true, bottom: true, shadowEnabled: true)
+        
+        contentView.roundCornerWithRadius(6, top: true, bottom: true, shadowEnabled: false)
         setupLayout()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -72,10 +78,14 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     func configure(habit: Habit) {
         self.habit = habit
+        
+        if habit.isAlreadyTakenToday {
+            checkBoxButton.backgroundColor = habit.color
+        }
+        
         nameHabitLabel.textColor = self.habit.color
         nameHabitLabel.text = self.habit.name
         dateLabel.text = self.habit.dateString
-        trackerLabel.text = "Подряд: \(Int.random(in: 0...10))"
         checkBoxButton.layer.borderColor = habit.color.cgColor
         
         
@@ -84,7 +94,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         } else {
             checkBoxButton.backgroundColor = .white
         }
-         
+        
     }
     
     private func setupLayout() {
@@ -96,6 +106,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let constraints = [
             nameHabitLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameHabitLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nameHabitLabel.trailingAnchor.constraint(equalTo: checkBoxButton.leadingAnchor, constant: -20),
             
             dateLabel.topAnchor.constraint(equalTo: nameHabitLabel.bottomAnchor, constant: 4),
             dateLabel.leadingAnchor.constraint(equalTo: nameHabitLabel.leadingAnchor),
@@ -113,3 +124,4 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
 }
+
