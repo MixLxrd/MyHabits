@@ -63,9 +63,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        print(habit.trackDates)
-        
         contentView.roundCornerWithRadius(6, top: true, bottom: true, shadowEnabled: false)
         setupLayout()
         

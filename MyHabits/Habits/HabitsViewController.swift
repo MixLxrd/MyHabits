@@ -9,6 +9,7 @@ protocol UpdateCollectionViewProtocol {
     func reloadSlider()
 }
 
+
 import UIKit
 
 class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
@@ -39,6 +40,7 @@ class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
     } ()
     
     @objc func tapAddButton() {
+
         let vc = HabitViewController()
         vc.delegate = self
         self.navigationController?.present(vc, animated: true, completion: nil)
@@ -105,7 +107,6 @@ extension HabitsViewController: UICollectionViewDataSource {
         let habit = store.habits[indexPath.item]
         let vc = HabitDetailsViewController()
         vc.habit = habit
-        //navigationController?.present(vc, animated: true, completion: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
     
