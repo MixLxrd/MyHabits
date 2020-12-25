@@ -86,12 +86,6 @@ class HabitViewController: UIViewController {
     private lazy var habitTimeLabelText: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        /*
-         let templateAttributedText: NSMutableAttributedString = .init(string: "")
-         templateAttributedText.append(.init(string: "Каждый день в", attributes: [.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.black]))
-         templateAttributedText.append(.init(string: " \(newHabit.date)", attributes: [.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.CustomPurple]))
-         label.attributedText = templateAttributedText
-         */
         label.text = "Каждый день в"
         return label
     }()

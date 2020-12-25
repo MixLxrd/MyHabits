@@ -24,6 +24,8 @@
 		2CCF3C222551B92E00F36903 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF3C212551B92E00F36903 /* HabitsStore.swift */; };
 		2CCF3C262551BA5200F36903 /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF3C252551BA5200F36903 /* HabitsViewController.swift */; };
 		2CCF3C292551BA5C00F36903 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF3C282551BA5C00F36903 /* InfoViewController.swift */; };
+		2CFA2CE42595E24C006FF629 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA2CE32595E24C006FF629 /* HabitDetailsViewController.swift */; };
+		2CFA2CE72595EB09006FF629 /* HabitDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA2CE62595EB09006FF629 /* HabitDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		2CCF3C212551B92E00F36903 /* HabitsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
 		2CCF3C252551BA5200F36903 /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
 		2CCF3C282551BA5C00F36903 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		2CFA2CE32595E24C006FF629 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
+		2CFA2CE62595EB09006FF629 /* HabitDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 				2CCF3C252551BA5200F36903 /* HabitsViewController.swift */,
 				2C9E33012564555200D122F1 /* HabitViewController.swift */,
 				2C17288C258546C40084534B /* ProgressCollectionViewCell.swift */,
+				2CFA2CE32595E24C006FF629 /* HabitDetailsViewController.swift */,
+				2CFA2CE62595EB09006FF629 /* HabitDetailTableViewCell.swift */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -204,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C9E330C256EC51E00D122F1 /* UIView + AutoLayout.swift in Sources */,
+				2CFA2CE72595EB09006FF629 /* HabitDetailTableViewCell.swift in Sources */,
 				2CCF3C222551B92E00F36903 /* HabitsStore.swift in Sources */,
 				2C9E3310256EC61900D122F1 /* CustomUI.swift in Sources */,
 				2C9E3315256ED0E100D122F1 /* Information about Habits.swift in Sources */,
@@ -213,6 +220,7 @@
 				2C9E332325723E0700D122F1 /* HabitCollectionViewCell.swift in Sources */,
 				2CCF3C022551B55800F36903 /* AppDelegate.swift in Sources */,
 				2C17288D258546C40084534B /* ProgressCollectionViewCell.swift in Sources */,
+				2CFA2CE42595E24C006FF629 /* HabitDetailsViewController.swift in Sources */,
 				2CCF3C042551B55800F36903 /* SceneDelegate.swift in Sources */,
 				2CCF3C262551BA5200F36903 /* HabitsViewController.swift in Sources */,
 				2CCF3C292551BA5C00F36903 /* InfoViewController.swift in Sources */,

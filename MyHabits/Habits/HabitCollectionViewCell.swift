@@ -12,9 +12,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     var didTapOnCell: (() -> Void)?
     
-    var habit = Habit(name: "Выпить стакан воды перед завтраком",
-                      date: Date(),
-                      color: .systemRed)
+    var habit = Habit(name: "Выпить стакан воды перед завтраком", date: Date(), color: .systemRed)
     
     private lazy var nameHabitLabel: UILabel = {
         let label = UILabel()
@@ -66,6 +64,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        print(habit.trackDates)
+        
         contentView.roundCornerWithRadius(6, top: true, bottom: true, shadowEnabled: false)
         setupLayout()
         
@@ -87,7 +87,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         nameHabitLabel.text = self.habit.name
         dateLabel.text = self.habit.dateString
         checkBoxButton.layer.borderColor = habit.color.cgColor
-        
+        trackerLabel.text = "Подряд: \(habit.trackDates.count)"
         
         if habit.isAlreadyTakenToday {
             checkBoxButton.backgroundColor = habit.color

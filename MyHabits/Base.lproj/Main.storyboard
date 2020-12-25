@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="2686" y="460"/>
         </scene>
-        <!--Привычки-->
+        <!--Сегодня-->
         <scene sceneID="Xuo-qi-o6O">
             <objects>
-                <viewController id="S1L-Qb-w5l" customClass="HabitsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Сегодня" id="S1L-Qb-w5l" customClass="HabitsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fXI-b6-MTe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,14 +55,31 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Привычки" image="rectangle.grid.1x2.fill" catalog="system" id="BIZ-9p-Bz6"/>
-                    <navigationItem key="navigationItem" id="WuN-lx-CVE"/>
+                    <navigationItem key="navigationItem" title="Сегодня" id="WuN-lx-CVE"/>
                     <connections>
                         <segue destination="hgu-79-Vv0" kind="presentation" identifier="createHabit" id="eLH-60-9q6"/>
+                        <segue destination="V5M-3p-wbX" kind="show" identifier="habitDetails" id="vkX-qZ-ePc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDz-0w-XtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2685.5999999999999" y="-242.42878560719643"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rj7-Aj-Puk">
+            <objects>
+                <viewController id="V5M-3p-wbX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CgR-o9-w74">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Y4v-vl-fsO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CBU-42-pCK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vja-vK-ate" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3798" y="66"/>
         </scene>
         <!--Создать-->
         <scene sceneID="4rd-nv-Dp4">
@@ -95,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ry3-PQ-Ejv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3612" y="-242"/>
+            <point key="canvasLocation" x="3807" y="-725"/>
         </scene>
         <!--Habits-->
         <scene sceneID="zJj-lY-jrA">

@@ -41,8 +41,6 @@ class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
     @objc func tapAddButton() {
         let vc = HabitViewController()
         vc.delegate = self
-        //vc.modalPresentationStyle = .currentContext
-        
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     
@@ -58,8 +56,12 @@ class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         //HabitsStore.shared.habits.removeAll()
+        
         habitsCollectionView.reloadData()
         setupLayout()
+        //title = "Сегодня"
+        
+        //navigationController?.navigationItem.title = "Сегодня"
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -99,6 +101,14 @@ class HabitsViewController: UIViewController, UpdateCollectionViewProtocol {
 
 extension HabitsViewController: UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let habit = store.habits[indexPath.item]
+        let vc = HabitDetailsViewController()
+        vc.habit = habit
+        //navigationController?.present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
@@ -118,6 +128,8 @@ extension HabitsViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             let cellProgress = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProgressCollectionViewCell.self), for: indexPath) as! ProgressCollectionViewCell
             cellProgress.setupUI()
+            
+            
             return cellProgress
         } else {
             let cellHabit = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as! HabitCollectionViewCell
@@ -128,6 +140,8 @@ extension HabitsViewController: UICollectionViewDataSource {
             }
             return cellHabit
         }
+        
+        
         
     }
     
