@@ -15,11 +15,11 @@ import UIKit
 class HabitDetailsViewController: UIViewController {
     
     
-
+    
     var habit = Habit(name: "Выпить стакан воды перед завтраком", date: Date(), color: .systemRed)
     
     private lazy var habitTableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.toAutoLayout()
         tableView.register(HabitDetailViewCell.self, forCellReuseIdentifier: String(describing: HabitDetailViewCell.self))
         tableView.dataSource = self
@@ -63,6 +63,7 @@ class HabitDetailsViewController: UIViewController {
             habitTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+        
     }
     
     private lazy var dateFormatter: DateFormatter = {
@@ -80,14 +81,21 @@ extension HabitDetailsViewController: UITableViewDelegate {
 extension HabitDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return HabitsStore.shared.dates.count
+        var countDates: Int = 0
+        for date in HabitsStore.shared.dates {
+            if HabitsStore.shared.habit(habit, isTrackedIn: date) {
+                countDates += 1
+            }
+        }
+        return countDates
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HabitDetailViewCell.self), for: indexPath) as! HabitDetailViewCell
         
         let storeDates: [Date] = HabitsStore.shared.dates.reversed()
-
+        
         if HabitsStore.shared.habit(habit, isTrackedIn: storeDates[indexPath.row]) {
             cell.textLabel?.text = dateFormatter.string(from: storeDates[indexPath.row])
         }
@@ -95,10 +103,18 @@ extension HabitDetailsViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "АКТИВНОСТЬ"
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
 
 extension HabitDetailsViewController: Callback {
     func callback() {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popToRootViewController(animated: true)
     }
 }

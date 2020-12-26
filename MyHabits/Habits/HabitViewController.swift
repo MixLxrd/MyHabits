@@ -168,6 +168,7 @@ class HabitViewController: UIViewController {
         
         let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.newHabit)! )
+            self.delegate2?.callback()
             self.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(cancelAction)
