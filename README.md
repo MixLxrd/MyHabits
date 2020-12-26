@@ -1,4 +1,7 @@
-# MyHabits
+
+
+  <p align="center" width="100%">
+  # MyHabits
 ## Трекер полезных привычек
 
 - Адаптивная верстка экранов;
@@ -8,8 +11,6 @@
 - Использование и настройка визуальных компонентов;
 
 - Использование UITableView, UICollectionView и кастомных ячеек.
-
-  <p align="center" width="100%">
     <img width=" на 75%" src="./Design/promo.png"> 
   </p>
   
