@@ -29,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274ED87C26D7D5E7007CC765 /* MyHabits copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MyHabits copy-Info.plist"; path = "/Users/mike/MyHabits/MyHabits copy-Info.plist"; sourceTree = "<absolute>"; };
 		2C17288C258546C40084534B /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C9E33012564555200D122F1 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		2C9E3305256EC4C600D122F1 /* UIView + RoundedShadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + RoundedShadows.swift"; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 				2CCF3C1E2551B92600F36903 /* iosui-diplom-main */,
 				2CCF3C002551B55800F36903 /* MyHabits */,
 				2CCF3BFF2551B55800F36903 /* Products */,
+				274ED87C26D7D5E7007CC765 /* MyHabits copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
