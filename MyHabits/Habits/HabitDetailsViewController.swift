@@ -87,7 +87,8 @@ extension HabitDetailsViewController: UITableViewDataSource {
                 countDates += 1
             }
         }
-        return countDates
+        //return countDates
+        return HabitsStore.shared.dates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,9 +96,11 @@ extension HabitDetailsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HabitDetailViewCell.self), for: indexPath) as! HabitDetailViewCell
         
         let storeDates: [Date] = HabitsStore.shared.dates.reversed()
+        cell.textLabel?.text = dateFormatter.string(from: storeDates[indexPath.row])
         
         if HabitsStore.shared.habit(habit, isTrackedIn: storeDates[indexPath.row]) {
-            cell.textLabel?.text = dateFormatter.string(from: storeDates[indexPath.row])
+            cell.accessoryType  = .checkmark
+            cell.tintColor = .purple
         }
         
         return cell

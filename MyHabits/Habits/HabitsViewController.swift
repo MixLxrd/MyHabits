@@ -105,10 +105,15 @@ extension HabitsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let habit = store.habits[indexPath.item]
-        let vc = HabitDetailsViewController()
-        vc.habit = habit
-        navigationController?.pushViewController(vc, animated: true)
+        if indexPath.section == 0 {
+            
+        } else {
+            let habit = store.habits[indexPath.item]
+            let vc = HabitDetailsViewController()
+            vc.habit = habit
+            navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
     
     
