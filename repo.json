@@ -1,0 +1,18 @@
+{
+  "Plugins": [
+    {
+      "Name": "AniLibria STRM Plugin",
+      "Guid": "cce0798d-c8b7-4265-b08c-dc9e7bd3fc0f",
+      "Version": "1.0.0",
+      "Overview": "Creates .strm / .nfo / .edl for AniLibria",
+      "Packages": [
+        {
+          "TargetAbi": "10.10.0.0",
+          "AssemblyVersion": "1.0.0.0",
+          "ZipUrl": "https://github.com/MixLxrd/MyHabits/raw/refs/heads/main/aniliberty-strm-plugin_2.0.0.3.zip",
+          "Checksum": "95667386f52108f41c5edd02d52d946784160ff360359feda54d4457a8834bec"
+        }
+      ]
+    }
+  ]
+}
