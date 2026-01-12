@@ -9,10 +9,11 @@
         {
           "TargetAbi": "10.10.0.0",
           "AssemblyVersion": "1.0.0.0",
-          "ZipUrl": "https://github.com/MixLxrd/MyHabits/raw/refs/heads/main/aniliberty-strm-plugin_2.0.0.3.zip",
+          "ZipUrl": "https://github.com/MixLxrd/MyHabits/raw/refs/heads/main/AniLibriaStrm_1.0.0.zip",
           "Checksum": "95667386f52108f41c5edd02d52d946784160ff360359feda54d4457a8834bec"
         }
       ]
     }
   ]
+
 }
