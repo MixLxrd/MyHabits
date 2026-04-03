@@ -81,13 +81,6 @@ extension HabitDetailsViewController: UITableViewDelegate {
 extension HabitDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var countDates: Int = 0
-        for date in HabitsStore.shared.dates {
-            if HabitsStore.shared.habit(habit, isTrackedIn: date) {
-                countDates += 1
-            }
-        }
-        //return countDates
         return HabitsStore.shared.dates.count
     }
     

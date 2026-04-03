@@ -50,12 +50,19 @@ class HabitCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var checkBoxImageView: UIImageView = {
+        let imageView = UIImageView()
+       return imageView
+    }()
+    
     @objc func checkBoxButtonPressed() {
         if habit.isAlreadyTakenToday {
             print("Привычка")
         } else {
             HabitsStore.shared.track(habit)
+            checkBoxButton.setImage(UIImage(named: "checkmark"), for: .normal)
             checkBoxButton.backgroundColor = habit.color
+            
         }
         didTapOnCell?()
     }
@@ -78,6 +85,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         
         if habit.isAlreadyTakenToday {
             checkBoxButton.backgroundColor = habit.color
+            checkBoxButton.setImage(UIImage(named: "checkmark"), for: .normal)
         }
         
         nameHabitLabel.textColor = self.habit.color
